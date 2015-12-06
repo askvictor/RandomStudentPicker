@@ -1,5 +1,6 @@
 package net.positivestate.randomstudentpicker;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             "Simon Says",
             "Dorothy Does" };
     private TextView mStatusText;
+    static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
 
     protected String getRandomStudent(String[] StudentList){
         return StudentList[new Random().nextInt(StudentList.length)];
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mStatusText = (TextView) findViewById(R.id.mTextView);
         showRandomStudent(Students);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        DataSyncTask d = new DataSyncTask(this);
+        d.execute();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,4 +74,19 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    void showGooglePlayServicesAvailabilityErrorDialog(
+            final int connectionStatusCode) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Dialog dialog = GooglePlayServicesUtil.getErrorDialog(
+                        connectionStatusCode,
+                        MainActivity.this,
+                        REQUEST_GOOGLE_PLAY_SERVICES);
+                dialog.show();
+            }
+        });
+    }
+
 }
