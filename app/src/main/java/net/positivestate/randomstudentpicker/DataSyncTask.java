@@ -15,6 +15,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.ClassroomScopes;
 import com.google.api.services.classroom.model.Course;
 import com.google.api.services.classroom.model.ListCoursesResponse;
@@ -27,9 +28,11 @@ import java.util.List;
 import java.util.Arrays;
 
 public class DataSyncTask extends AsyncTask<Void, Void, String> {
+
     private MainActivity mActivity;
     private Context mContext;
-    com.google.api.services.classroom.Classroom mService;
+    private Classroom mService;
+
     final HttpTransport transport = AndroidHttp.newCompatibleTransport();
     final JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
     static final int REQUEST_ACCOUNT_PICKER = 1000;
