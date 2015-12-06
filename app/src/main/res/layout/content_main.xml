@@ -9,6 +9,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
-    <TextView android:text="Loading..." android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:id="@+id/mTextView"/>
+    <TextView
+        android:text="@string/loading_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mTextView"/>
+
 </RelativeLayout>
+
